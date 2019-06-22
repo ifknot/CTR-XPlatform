@@ -9,7 +9,7 @@ endif()
 
 set(CMAKE_CXX_FLAGS "-Wall")
 set(CMAKE_CXX_FLAGS_DEBUG "--debug -Wextra")
-set(CMAKE_CXX_FLAGS_RELEASE "-Ofast")
+set(CMAKE_CXX_FLAGS_RELEASE "-Os")
 
 add_executable(CTR_XPlatform
         main.cpp)
