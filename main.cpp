@@ -1,7 +1,10 @@
 #include <iostream>
 
 int main(int argc, char* argv[]) {
-    for(auto i{0u}; i < argc; ++i) {
+    if(int a = 5; a > 0) {
+        std::cout << "C++17" << std::endl;
+    }
+    for(int i{0}; i < argc; ++i) {
         std::cout << i << " " << argv[i] << std::endl;
     }
 }
