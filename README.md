@@ -1,11 +1,14 @@
 # CTR-XPlatform
 ![rptx logo](https://cldup.com/W9fXBWKrXq.png)
-### Set up RPi to use CMAKE files and CLang C++17
+### Set up RPi(multicore)* to use CMAKE files and CLang C++17
+*not RPi zero
 #### 1. Setup CLang 8
 Download the official binary of CLang 8 for Raspberry Pi
 ```
 cd ~
 wget http://releases.llvm.org/8.0.0/clang+llvm-8.0.0-armv7a-linux-gnueabihf.tar.xz
+#Raspbery Pi Zero is ARMv6 so will *not* work
+#Zero uses the original BCM2835 SoC used on the first generation of Pi's and all the other single core models
 ```
 Extract the archive and move the extracted compilers to /usr/local
 ```
@@ -40,7 +43,11 @@ Select CLang system wide
   2            /usr/bin/gcc     20        manual mode
 Press enter to keep the current choice[*], or type selection number:
 ```
+> Removal
 
+```
+sudo rm -rf /usr/local/clang_8.0.0
+```
 
 #### 2. Setup CMAKE v3.14
 Download CMAKE v 3.14 and extract it
