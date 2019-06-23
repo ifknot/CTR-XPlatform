@@ -1,6 +1,7 @@
 # CTR-XPlatform
 ![rptx logo](https://cldup.com/W9fXBWKrXq.png)
-### Set up RPi to use CMAKE files and CLang C++17
+### Set up RPi(multicore)* to use CMAKE files and CLang C++17
+*not RPi zero
 #### 1. Setup CLang 8
 Download the official binary of CLang 8 for Raspberry Pi
 ```
