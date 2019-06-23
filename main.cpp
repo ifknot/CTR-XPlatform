@@ -1,6 +1,9 @@
 #include <iostream>
 
 int main(int argc, char* argv[]) {
+#ifdef __arm__
+    std::cout << "Detected the GCC/Arm combination\n";
+#endif
     if(int a = 5; a > 0) {
         std::cout << "C++17" << std::endl;
     }
