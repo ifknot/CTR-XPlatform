@@ -6,6 +6,8 @@ Download the official binary of CLang 8 for Raspberry Pi
 ```
 cd ~
 wget http://releases.llvm.org/8.0.0/clang+llvm-8.0.0-armv7a-linux-gnueabihf.tar.xz
+#Raspbery Pi Zero ia ARMv6
+#Zero uses the original BCM2835 SoC used on the first generation of Pi's and all the other single core models
 ```
 Extract the archive and move the extracted compilers to /usr/local
 ```
