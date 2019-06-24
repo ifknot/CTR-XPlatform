@@ -1,7 +1,7 @@
 # CTR Mode AES Block Chain Cipher
 ![rptx logo](https://cldup.com/W9fXBWKrXq.png)
-### C++17 set up RPi(arm7)* to use CMAKE files and CLang 8
-*not RPi Zero(arm6) - see https://github.com/ifknot/ctr/wiki/RPi-Zero(w)-C--17-set-up-to-use-CMAKE-files-and-GCC-9
+### C++17 set up RPi(arm7)* to use CLang 8 and CMAKE files
+*not RPi Zero(arm6) - see [Pi Zero GCC 9 and CMAKE](https://github.com/ifknot/ctr/wiki/RPi-Zero(w)-C--17-set-up-to-use-GCC-9-and-CMAKE-files)
 #### 1. Setup CLang 8
 Download the official binary of CLang 8 for Raspberry Pi
 ```
