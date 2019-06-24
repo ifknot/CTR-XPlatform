@@ -3,14 +3,16 @@
 ### C++17 set up RPi(multicore)* to use CMAKE files and CLang 8
 *not RPi zero - see https://github.com/ifknot/ctr/wiki/RPi-Zero(w)-C--17-set-up-to-use-CMAKE-files-and-GCC-9
 #### 1. Setup CLang 8
-(thanks to [solarian programmer](https://solarianprogrammer.com/2017/12/08/raspberry-pi-raspbian-install-gcc-compile-cpp-17-programs/))
-
 Download the official binary of CLang 8 for Raspberry Pi
 ```
 cd ~
 wget http://releases.llvm.org/8.0.0/clang+llvm-8.0.0-armv7a-linux-gnueabihf.tar.xz
 #Raspbery Pi Zero is ARMv6 so will *not* work
-#Zero uses the original BCM2835 SoC used on the first generation of Pi's and all the other single core models
+#Zero uses the originalthanks to: 
+111
++ [solarian programmer](https://solarianprogrammer.com/2017/12/08/raspberry-pi-raspbian-install-gcc-compile-cpp-17-programs/)
+112
++  BCM2835 SoC used on the first generation of Pi's and all the other single core models
 ```
 Extract the archive and move the extracted compilers to /usr/local
 ```
@@ -30,13 +32,21 @@ Add CLang as a system option install as a new alternative:
 ```
 sudo update-alternatives --install /usr/bin/cc cc /usr/local/clang_8.0.0/bin/clang 10
 sudo update-alternatives --install /usr/bin/c++ c++ /usr/local/clang_8.0.0/bin/clang++ 10
-```
+```thanks to: 
+111
++ [solarian programmer](https://solarianprogrammer.com/2017/12/08/raspberry-pi-raspbian-install-gcc-compile-cpp-17-programs/)
+112
++ 
 Configure CLang for C and C++
 ```
 sudo update-alternatives --config cc
 sudo update-alternatives --config c++
 ```
-Select CLang system wide
+Select CLang system widthanks to: 
+111
++ [solarian programmer](https://solarianprogrammer.com/2017/12/08/raspberry-pi-raspbian-install-gcc-compile-cpp-17-programs/)
+112
++ e
 ```
   Selection    Path            Priority   Status
 ------------------------------------------------------------
@@ -83,7 +93,7 @@ CMake suite maintained and supported by Kitware (kitware.com/cmake).
 Example CMakeList.txt optimize for memory footprint
 ```cmake
 cmake_minimum_required(VERSION 3.14)
-project(CTR_XPlatform)
+project(ctr)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -91,11 +101,15 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif()
 
-set(CMAKE_CXX_FLAGS "-Wall")
+set(CMAKE_CXX_FLAGS "-Wthanks to: 
+111
++ [solarian programmer](https://solarianprogrammer.com/2017/12/08/raspberry-pi-raspbian-install-gcc-compile-cpp-17-programs/)
+112
++ all")
 set(CMAKE_CXX_FLAGS_DEBUG "--debug -Wextra")
 set(CMAKE_CXX_FLAGS_RELEASE "-Os") #optimize for memory footprint
 
-add_executable(CTR_XPlatform
+add_executable(ctr
         main.cpp)
 ```
 
@@ -106,3 +120,7 @@ cd build
 cmake ..
 make
 ```
+
+thanks to: 
++ [solarian programmer](https://solarianprogrammer.com/2017/12/08/raspberry-pi-raspbian-install-gcc-compile-cpp-17-programs/)
++ [nick cullen](https://nickcullen.net/blog/raspberry-pi-tutorials/raspberry-pi-c-using-cmake/)
