@@ -1,7 +1,7 @@
-# CTR-XPlatform
+# CTR Mode AES Block Chain Cipher
 ![rptx logo](https://cldup.com/W9fXBWKrXq.png)
-### Set up RPi(multicore)* to use CMAKE files and CLang C++17
-*not RPi zero
+### C++17 set up RPi(multicore)* to use CMAKE files and CLang 8
+*not RPi zero - see https://github.com/ifknot/ctr/wiki/RPi-Zero(w)-C--17-set-up-to-use-CMAKE-files-and-GCC-9
 #### 1. Setup CLang 8
 Download the official binary of CLang 8 for Raspberry Pi
 ```
