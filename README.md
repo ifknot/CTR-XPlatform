@@ -9,10 +9,6 @@ cd ~
 wget http://releases.llvm.org/8.0.0/clang+llvm-8.0.0-armv7a-linux-gnueabihf.tar.xz
 #Raspbery Pi Zero is ARMv6 so will *not* work
 #Zero uses the originalthanks to: 
-111
-+ [solarian programmer](https://solarianprogrammer.com/2017/12/08/raspberry-pi-raspbian-install-gcc-compile-cpp-17-programs/)
-112
-+  BCM2835 SoC used on the first generation of Pi's and all the other single core models
 ```
 Extract the archive and move the extracted compilers to /usr/local
 ```
@@ -92,10 +88,6 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 set(CMAKE_CXX_FLAGS "-Wthanks to: 
-111
-+ [solarian programmer](https://solarianprogrammer.com/2017/12/08/raspberry-pi-raspbian-install-gcc-compile-cpp-17-programs/)
-112
-+ all")
 set(CMAKE_CXX_FLAGS_DEBUG "--debug -Wextra")
 set(CMAKE_CXX_FLAGS_RELEASE "-Os") #optimize for memory footprint
 
