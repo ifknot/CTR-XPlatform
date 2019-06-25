@@ -32,22 +32,12 @@ Add CLang as a system option install as a new alternative:
 ```
 sudo update-alternatives --install /usr/bin/cc cc /usr/local/clang_8.0.0/bin/clang 10
 sudo update-alternatives --install /usr/bin/c++ c++ /usr/local/clang_8.0.0/bin/clang++ 10
-```thanks to: 
-111
-+ [solarian programmer](https://solarianprogrammer.com/2017/12/08/raspberry-pi-raspbian-install-gcc-compile-cpp-17-programs/)
-112
-+ 
+```
 Configure CLang for C and C++
 ```
 sudo update-alternatives --config cc
 sudo update-alternatives --config c++
-```
-Select CLang system widthanks to: 
-111
-+ [solarian programmer](https://solarianprogrammer.com/2017/12/08/raspberry-pi-raspbian-install-gcc-compile-cpp-17-programs/)
-112
-+ e
-```
+
   Selection    Path            Priority   Status
 ------------------------------------------------------------
 * 0            /usr/bin/gcc     20        auto mode
