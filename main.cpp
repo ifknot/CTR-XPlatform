@@ -1,13 +1,24 @@
+
 #include <iostream>
+#include <string>
+#include <filesystem>
 
 int main(int argc, char* argv[]) {
 #ifdef __arm__
-    std::cout << "Detected the GCC/Arm combination\n";
+    std::cout << "ARM\n";
 #endif
-    if(int a = 5; a > 0) {
-        std::cout << "C++17" << std::endl;
+
+    if(argc != 3) {
+        std::cout << "Usage: ./ctr input_file output_file\n";
+        return 1;
     }
-    for(int i{0}; i < argc; ++i) {
-        std::cout << i << " " << argv[i] << std::endl;
-    }
+
+    std::filesystem::path self_path{argv[0]};
+    std::filesystem::path input_path{argv[1]};
+    std::filesystem::path output_path{argv[2]};
+
+    std::cout << input_path << " " << output_path << "\n";
+
+    std::cout << std::filesystem::exists(self_path);
+
 }

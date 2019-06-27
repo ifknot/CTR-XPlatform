@@ -87,7 +87,7 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif()
 
-set(CMAKE_CXX_FLAGS)
+set(CMAKE_CXX_FLAGS "-Wall")
 set(CMAKE_CXX_FLAGS_DEBUG "--debug -Wextra")
 set(CMAKE_CXX_FLAGS_RELEASE "-Os") #optimize for memory footprint
 
