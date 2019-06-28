@@ -33,8 +33,6 @@ int main(int argc, char* argv[]) {
     std::ifstream input_file(input_path, std::ios::in | std::ios::binary);
     std::vector<char> buffer(std::istreambuf_iterator<char>(input_file), {});
 
-    std::cout << "buffer \033[1;0m" << buffer.size() << "\033[0m bytes\n";
-
     //request default padder (PKSC7) from the compile time factory
     using padder_t = crypto::padder<>;
     //request an AES (default) counter (CTR) block_cipher from the compile time factory
@@ -51,8 +49,13 @@ int main(int argc, char* argv[]) {
     padder_t pkcs7;
     // build padding
     auto n = pkcs7.pad(buffer.begin(), buffer.end(), padding.begin());
+    // the padder is deliberately agnostic to the collection - so must manipulate directly
+    for(size_t i{0}; i < n; ++i) {
+        buffer.push_back(padding[i]);
+    }
 
     std::cout << "padding = " << n << "\n";
+    std::cout << "buffer \033[1;0m" << buffer.size() << "\033[0m bytes\n";
 
     std::ofstream output_file(output_path, std::ios::out | std::ios::binary);
     output_file.write(buffer.data(), buffer.size());

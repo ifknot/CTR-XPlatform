@@ -65,7 +65,7 @@ namespace crypto {
          * @return pad value - which can be used in a simple loop to pad the data container
          */
         inline size_t pad_value(size_t data_size) {
-            return block_size() - data_size % block_size();
+            return block_size() - (data_size % block_size());
         }
 
         /**
