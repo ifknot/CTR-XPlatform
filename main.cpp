@@ -4,6 +4,7 @@
 #include <filesystem>
 #include <fstream>
 #include <vector>
+#include <sstream>
 
 #include "crypto/padder_factory.h"
 #include "crypto/nonce_factory.h"
@@ -13,13 +14,29 @@ namespace fs =  std::filesystem;
 
 int main(int argc, char* argv[]) {
 #ifdef __arm__
-    #include <stdio.h>
     std::cout << "ARM\n";
-    unsigned int r;
-    FILE *frand=fopen("/dev/hwrng","r");
-    fread(&r,sizeof(unsigned int),1,frand);
-    printf("Your random number is %u.\n",r);
 #endif
+
+    unsigned long long int random_value = 0; //Declare value to store data into
+    size_t size = sizeof(random_value); //Declare size of data
+    std::ifstream urandom("/dev/urandom", std::ios::in | std::ios::binary); //Open stream
+    if(urandom) //Check if stream is open
+    {
+        urandom.read(reinterpret_cast<char*>(&random_value), size); //Read from urandom
+        if(urandom) //Check if stream is ok, read succeeded
+        {
+            std::cout << "Read random value: " << random_value << std::endl;
+        }
+        else //Read failed
+        {
+            std::cerr << "Failed to read from /dev/urandom" << std::endl;
+        }
+        urandom.close(); //close stream
+    }
+    else //Open failed
+    {
+        std::cerr << "Failed to open /dev/urandom" << std::endl;
+    }
 
     if(argc != 3) {
         std::cout << "Usage: ./ctr input_file output_file\n";
