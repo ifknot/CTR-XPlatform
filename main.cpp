@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "crypto/padder_factory.h"
+#include "crypto/nonce_factory.h"
 #include "crypto/block_cipher_factory.h"
 
 namespace fs =  std::filesystem;
@@ -35,6 +36,8 @@ int main(int argc, char* argv[]) {
 
     //request default padder (PKSC7) from the compile time factory
     using padder_t = crypto::padder<>;
+    //request default nonce (RDSEED) from the compile time factory
+    using nonce_t = crypto::nonce<>;
     //request an AES (default) counter (CTR) block_cipher from the compile time factory
     using cipher_t = crypto::block_cipher<crypto::CTR>;
     // 256 bit key
@@ -50,9 +53,13 @@ int main(int argc, char* argv[]) {
     // build padding
     auto n = pkcs7.pad(buffer.begin(), buffer.end(), padding.begin());
     // the padder is deliberately agnostic to the collection - so must manipulate directly
-    for(size_t i{0}; i < n; ++i) {
-        buffer.push_back(padding[i]);
-    }
+    buffer.insert(buffer.end(), padding.begin(), padding.begin() + n);
+
+    std::cout << "rdseed? " << crypto::can_rdseed() << "\n";
+
+    //nonce_t n;
+    //auto nonce_block = n();
+
 
     std::cout << "padding = " << n << "\n";
     std::cout << "buffer \033[1;0m" << buffer.size() << "\033[0m bytes\n";
