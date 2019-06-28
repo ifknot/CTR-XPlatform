@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
     //request default padder (PKSC7) from the compile time factory
     using padder_t = crypto::padder<>;
     //request default nonce (RDSEED) from the compile time factory
-    using nonce_t = crypto::nonce<>;
+    //using nonce_t = crypto::nonce<>;
     //request an AES (default) counter (CTR) block_cipher from the compile time factory
     using cipher_t = crypto::block_cipher<crypto::CTR>;
     // 256 bit key
@@ -59,7 +59,7 @@ int main(int argc, char* argv[]) {
     // the padder is deliberately agnostic to the collection - so must manipulate directly
     buffer.insert(buffer.end(), padding.begin(), padding.begin() + n);
 
-    std::cout << "rdseed? " << crypto::can_rdseed() << "\n";
+    //std::cout << "rdseed? " << crypto::can_rdseed() << "\n";
 
     //nonce_t n;
     //auto nonce_block = n();
