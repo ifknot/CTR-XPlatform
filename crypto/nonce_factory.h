@@ -59,7 +59,7 @@ namespace crypto {
         __cpuid(regs, 7);
         return regs[1] & bit_RDSEED;
     }
-#elseif define(__arm__)
+#elif defined(__arm__)
 
     bool can_rdrand() {
         return false;
