@@ -13,12 +13,21 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    std::filesystem::path self_path{argv[0]};
     std::filesystem::path input_path{argv[1]};
     std::filesystem::path output_path{argv[2]};
 
-    std::cout << input_path << " " << output_path << "\n";
+    if(!std::filesystem::exists(input_path)) {
+        std::cout << input_path << " \x1B[31mnot found in\033[0m " << std::filesystem::current_path() << "\n";
+    }
 
-    std::cout << std::filesystem::exists(self_path);
+    if(!std::filesystem::exists(output_path)) {
+        std::cout << output_path << " \x1B[31mnot found in\033[0m " << std::filesystem::current_path() << "\n";
+    }
+
+    if(!std::filesystem::exists(input_path) || !std::filesystem::exists(output_path)) {
+        return 1;
+    }
+
+    std::cout << input_path << " " << output_path << "\n";
 
 }
