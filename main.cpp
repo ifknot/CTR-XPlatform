@@ -3,6 +3,8 @@
 #include <string>
 #include <filesystem>
 
+namespace fs =  std::filesystem;
+
 int main(int argc, char* argv[]) {
 #ifdef __arm__
     std::cout << "ARM\n";
@@ -13,21 +15,14 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    std::filesystem::path input_path{argv[1]};
-    std::filesystem::path output_path{argv[2]};
+    fs::path input_path{argv[1]};
+    fs::path output_path{argv[2]};
 
-    if(!std::filesystem::exists(input_path)) {
-        std::cout << input_path << " \x1B[31mnot found in\033[0m " << std::filesystem::current_path() << "\n";
-    }
-
-    if(!std::filesystem::exists(output_path)) {
-        std::cout << output_path << " \x1B[31mnot found in\033[0m " << std::filesystem::current_path() << "\n";
-    }
-
-    if(!std::filesystem::exists(input_path) || !std::filesystem::exists(output_path)) {
+    if(!fs::exists(input_path)) {
+        std::cout << input_path << " \033[1;31mnot found in\033[0m " << fs::current_path() << "\n";
         return 1;
     }
 
-    std::cout << input_path << " " << output_path << "\n";
+    std::cout << fs::file_size(input_path) << "\n";
 
 }
