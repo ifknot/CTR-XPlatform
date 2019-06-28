@@ -5,6 +5,9 @@
 #include <fstream>
 #include <vector>
 
+#include "crypto/padder_factory.h"
+#include "crypto/block_cipher_factory.h"
+
 namespace fs =  std::filesystem;
 
 int main(int argc, char* argv[]) {
@@ -31,6 +34,25 @@ int main(int argc, char* argv[]) {
     std::vector<char> buffer(std::istreambuf_iterator<char>(input_file), {});
 
     std::cout << "buffer \033[1;0m" << buffer.size() << "\033[0m bytes\n";
+
+    //request default padder (PKSC7) from the compile time factory
+    using padder_t = crypto::padder<>;
+    //request an AES (default) counter (CTR) block_cipher from the compile time factory
+    using cipher_t = crypto::block_cipher<crypto::CTR>;
+    // 256 bit key
+    using key_t = std::array<cipher_t::value_type, 32>;
+
+    key_t key = {0x60, 0x3d, 0xeb, 0x10, 0x15, 0xca, 0x71, 0xbe, 0x2b, 0x73, 0xae, 0xf0, 0x85, 0x7d, 0x77, 0x81,
+                 0x1f, 0x35, 0x2c, 0x07, 0x3b, 0x61, 0x08, 0xd7, 0x2d, 0x98, 0x10, 0xa3, 0x09, 0x14, 0xdf, 0xf4};
+
+    // space for padding
+    std::vector<padder_t::value_type> padding(padder_t::block_size());
+    // a padder
+    padder_t pkcs7;
+    // build padding
+    auto n = pkcs7.pad(buffer.begin(), buffer.end(), padding.begin());
+
+    std::cout << "padding = " << n << "\n";
 
     std::ofstream output_file(output_path, std::ios::out | std::ios::binary);
     output_file.write(buffer.data(), buffer.size());
