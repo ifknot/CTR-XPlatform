@@ -298,7 +298,16 @@ namespace crypto {
 
     };
     #endif
+#elif defined(__arm__)
+    /*
+    #include <stdio.h>
 
+    unsigned int r;
+    FILE *frand=fopen("/dev/hwrng","r");
+    fread(&r,sizeof(unsigned int),1,frand);
+    printf("Your random number is %u.\n",r);
+
+    */
 #else
 
     /**

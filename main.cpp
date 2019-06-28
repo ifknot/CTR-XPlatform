@@ -14,6 +14,10 @@ namespace fs =  std::filesystem;
 int main(int argc, char* argv[]) {
 #ifdef __arm__
     std::cout << "ARM\n";
+    unsigned int r;
+    FILE *frand=fopen("/dev/hwrng","r");
+    fread(&r,sizeof(unsigned int),1,frand);
+    printf("Your random number is %u.\n",r);
 #endif
 
     if(argc != 3) {
