@@ -4,7 +4,7 @@
 #include <filesystem>
 #include <fstream>
 #include <vector>
-#include <sstream>
+#include <random>
 
 #include "crypto/padder_factory.h"
 #include "crypto/nonce_factory.h"
@@ -37,6 +37,9 @@ int main(int argc, char* argv[]) {
     {
         std::cerr << "Failed to open /dev/urandom" << std::endl;
     }
+
+    std::random_device rd;
+    std::cout << "entropy = " << rd.entropy() << '\n';
 
     if(argc != 3) {
         std::cout << "Usage: ./ctr input_file output_file\n";
