@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 #include <filesystem>
+#include <fstream>
+#include <vector>
 
 namespace fs =  std::filesystem;
 
@@ -23,6 +25,10 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    std::cout << fs::file_size(input_path) << "\n";
+    std::cout << input_path << " \033[1;0m" << fs::file_size(input_path) << "\033[0m bytes\n";
 
+    std::ifstream input_file (input_path, std::ios::in | std::ios::binary);
+    std::vector<unsigned char> buffer(std::istreambuf_iterator<char>(input_file), {});
+
+    std::cout << "buffer \033[1;0m" << buffer.size() << "\033[0m bytes\n";
 }
