@@ -13,6 +13,7 @@ namespace fs =  std::filesystem;
 
 int main(int argc, char* argv[]) {
 #ifdef __arm__
+    #include <stdio.h>
     std::cout << "ARM\n";
     unsigned int r;
     FILE *frand=fopen("/dev/hwrng","r");
