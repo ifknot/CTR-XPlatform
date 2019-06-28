@@ -111,15 +111,21 @@ namespace crypto {
         CSSEED32, CSSEED16
 #endif
     };
+#elif defined(__arm__)
+    /**
+     * @note /dev/urandom yields data which is indistinguishable from true randomness, given existing technology.
+     */
+    enum nonce_mode_t {
+        CSSEED64
+    };
 #else
     /**
-     * @warning Not cryptographically secure - only for testing
+     * @warning *Possibly* not cryptographically secure - only for testing
      */
     enum nonce_mode_t {
         PRSEED32
     };
 #endif
-
 
 #ifdef __RDSEED__
 
@@ -177,15 +183,11 @@ namespace crypto {
     private:
 
         seed_t rdseed() {
-#ifdef NDEBUG
             seed_t n;
             if(_rdseed32_step (&n)) {
                 return n;
             }
             throw doh::cipher_exception(doh::DETERMINISTIC);
-#else //return a debug constant for testing against
-            return 0x89ABCDEF;
-#endif
         }
 
     };
@@ -230,15 +232,11 @@ namespace crypto {
     private:
 
         seed_t rdseed() {
-#ifdef NDEBUG
             seed_t n;
             if(_rdseed16_step (&n)) {
                 return n;
             }
             throw cipher_exception(doh::DETERMINISTIC);
-#else //return a debug constant for testing against
-            return 0xCDEF;
-#endif
         }
 
     };
@@ -285,33 +283,21 @@ namespace crypto {
     private:
 
         seed_t rdseed() {
-#ifdef NDEBUG
             seed_t n;
             if(_rdseed64_step (&n)) {
                 return n;
             }
             throw pug::doh::cipher_exception(pug::doh::DETERMINISTIC);
-#else
-            return 0x0123456789ABCDEF;
-#endif;
         }return rd();
 
     };
     #endif
 #elif defined(__arm__)
-    /*
-    #include <stdio.h>
 
-    unsigned int r;
-    FILE *frand=fopen("/dev/hwrng","r");
-    fread(&r,sizeof(unsigned int),1,frand);
-    printf("Your random number is %u.\n",r);
-
-    */
 #else
 
     /**
-     * @warning Here be cryptographically insecure dragons!
+     * @warning Here be *potentially* cryptographically insecure dragons!
      * @tparam M
      * @tparam nonce_size
      * @tparam T
@@ -324,8 +310,8 @@ namespace crypto {
         using seed_t = std::random_device::result_type;
 
         /**
-         * @brief *in*secure nonce generator
-         * @return a cryptographically useless nonce block
+         * @brief potentially *in*secure nonce generator
+         * @return a cryptographically untrustworthy nonce block
          */
         block_t operator()() {
             block_t block{};
@@ -366,11 +352,7 @@ namespace crypto {
     private:
 
         seed_t rdseed() {
-#ifdef NDEBUG
             return rd();
-#else //return a debug constant for testing against
-            return 0x89ABCDEF;
-#endif
         }
 
         std::random_device rd;

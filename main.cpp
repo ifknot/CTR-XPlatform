@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
     std::cout << "ARM\n";
 #endif
 
-    unsigned long long int random_value = 0; //Declare value to store data into
+    uint64_t random_value = 0; //Declare value to store data into
     size_t size = sizeof(random_value); //Declare size of data
     std::ifstream urandom("/dev/urandom", std::ios::in | std::ios::binary); //Open stream
     if(urandom) //Check if stream is open
@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
         urandom.read(reinterpret_cast<char*>(&random_value), size); //Read from urandom
         if(urandom) //Check if stream is ok, read succeeded
         {
-            std::cout << "Read random value: " << random_value << std::endl;
+            std::cout << std::hex << "Read random value: " << random_value << std::endl;
         }
         else //Read failed
         {
