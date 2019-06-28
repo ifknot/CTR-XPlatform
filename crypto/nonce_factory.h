@@ -59,6 +59,16 @@ namespace crypto {
         __cpuid(regs, 7);
         return regs[1] & bit_RDSEED;
     }
+#elseif define(__arm__)
+
+    bool can_rdrand() {
+        return false;
+    }
+
+    bool can_rdseed() {
+        return false;
+    }
+
 #else // Use GNU C cpuid.h
 #include <cpuid.h>
     /**
